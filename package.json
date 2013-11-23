@@ -1,0 +1,24 @@
+{
+  "name": "fswalk",
+  "version": "1.0.0",
+  "description": "The simplest possible directory walker",
+  "main": "walk.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mcfedr/fswalk.git"
+  },
+  "keywords": [
+    "recusive",
+    "directory",
+    "walk"
+  ],
+  "author": "Fred Cox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcfedr/fswalk/issues"
+  },
+  "homepage": "https://github.com/mcfedr/fswalk"
+}
