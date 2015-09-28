@@ -1,13 +1,17 @@
 var fs = require('fs'),
     path = require('path');
 
-module.exports = function walk(dir, walkCb, finishCb) {
+module.exports = function walk(dir, walkCb, finishCb, limit) {
     fs.stat(dir, function(err, stats) {
         if(err) {
             finishCb && finishCb(err);
             return;
         }
         if(stats.isDirectory()) {
+            if (limit !== undefined && limit == 0) {
+                finishCb && finishCb();
+                return;
+            }
             fs.readdir(dir, function(err, files) {
                 var count = files.length + 1,
                     ok = true;
@@ -23,7 +27,7 @@ module.exports = function walk(dir, walkCb, finishCb) {
                             return;
                         }
                         after();
-                    });
+                    }, limit > 0 ? limit - 1 : limit);
                 });
 
                 after();
