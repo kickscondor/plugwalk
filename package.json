@@ -23,5 +23,6 @@
   "homepage": "https://github.com/mcfedr/fswalk",
   "devDependencies": {
     "mocha": "^2.3.3"
-  }
+  },
+  "engines" : { "node" : ">=0.10" }
 }
