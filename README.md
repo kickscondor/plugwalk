@@ -1,5 +1,8 @@
 # fswalk
 
+[![Build Status](https://travis-ci.org/mcfedr/fswalk.svg)](https://travis-ci.org/mcfedr/fswalk)
+[![npm version](https://badge.fury.io/js/fswalk.svg)](http://badge.fury.io/js/fswalk)
+
 The simplest possible directory walker
 
 ## API
