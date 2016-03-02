@@ -2,21 +2,34 @@ var fs = require('fs'),
     path = require('path');
 
 module.exports = function walk(dir, walkCb, finishCb, limit) {
+    function callWalkCb(file, stats, cb) {
+        if (walkCb.length == 3) {
+            walkCb(file, stats, cb);
+        } else {
+            walkCb(file, stats);
+            cb();
+        }
+    }
+
+    function callFinishCb(err) {
+        finishCb && finishCb(err);
+    }
+
     fs.stat(dir, function(err, stats) {
         if(err) {
-            finishCb && finishCb(err);
+            callFinishCb(err);
             return;
         }
         if(stats.isDirectory()) {
             if (limit !== undefined && limit == 0) {
-                finishCb && finishCb();
+                callFinishCb();
                 return;
             }
             fs.readdir(dir, function(err, files) {
                 var count = files.length + 1,
                     ok = true;
                 if(err) {
-                    finishCb && finishCb(err);
+                    callFinishCb(err);
                     return;
                 }
 
@@ -35,20 +48,19 @@ module.exports = function walk(dir, walkCb, finishCb, limit) {
                 function fail(err) {
                     if(ok) {
                         ok = false;
-                        finishCb && finishCb(err);
+                        callFinishCb(err);
                     }
                 }
 
                 function after() {
                     if(ok && --count == 0) {
-                        finishCb && finishCb();
+                        callFinishCb();
                     }
                 }
             });
         }
         else {
-            walkCb(dir, stats);
-            finishCb && finishCb();
+            callWalkCb(dir, stats, callFinishCb);
         }
     });
 };
