@@ -1,33 +1,42 @@
 # fswalk
 
-[![Build Status](https://travis-ci.org/mcfedr/fswalk.svg)](https://travis-ci.org/mcfedr/fswalk)
-[![npm version](https://badge.fury.io/js/fswalk.svg)](http://badge.fury.io/js/fswalk)
+> The simplest possible directory walker
 
-The simplest possible directory walker
+![Build Status](https://img.shields.io/travis/mcfedr/fswalk.svg?style=flat-square)
+[![npm version](https://img.shields.io/npm/v/fswalk.svg?style=flat-square)](https://npmjs.org/package/fswalk)
 
-## API
 
-`walk(dir, walkCb, finishCb, limit)`
+## Installation
 
-### Parameters
-
-* `dir`: absolute dir to walk
-* `walkCb`: `function(file, stats[, callback])` The function to be called with each file. If a callback is given any
-  errors will be propagated to finishCb and the walk will stop soon. `walkCb` is called in parallel for some files, so
-  the walk will stop at the current folder. `finishCb` will not be called until all `walkCb` callbacks have been called.
-* `finishCb`: `function(err)` Called when there are no more files
-* `limit`: max depth, undefined means no limit
+```bash
+npm install fswalk
+```
 
 ## Example
 
-    var walk = require('fswalk');
+```js
+var walk = require('fswalk');
 
-    walk(__dirname, function(path, stats) {
-      console.log(path, stats);
-    }, function(err) {
-      assert(!err);
-    });
+walk(__dirname, function(path, stats) {
+  console.log(path, stats);
+}, function(err) {
+  assert(!err);
+});
+```
 
-## Install
+## API
 
-`npm install fswalk`
+#### `walk(dir, walkCb, finishCb, limit)`
+
+##### Parameters
+
+* `dir`: The directory to walk
+* `walkCb`: `function(file, stats[, callback])` The function to be called with each file.
+
+* * `file`:  Relative file path
+* * `stats`: [fs.Stats](https://nodejs.org/docs/latest/api/fs.html#fs_class_fs_stats) object
+
+* * `callback`: If given, any errors will be propagated to `finishCb` and the walk will stop soon. `walkCb` is called in parallel for some files, so the walk will stop at the current folder. `finishCb` will not be called until all `walkCb` callbacks have been called.
+
+* `finishCb`: `function(err)` Called when all files have been walked.
+* `limit`: Max depth, `undefined` means no limit
