@@ -2,7 +2,7 @@
 
 > The simplest possible directory walker
 
-![Build Status](https://img.shields.io/travis/mcfedr/fswalk.svg?style=flat-square)
+[![Build Status](https://img.shields.io/travis/mcfedr/fswalk.svg?style=flat-square)](https://travis-ci.org/mcfedr/fswalk)
 [![npm version](https://img.shields.io/npm/v/fswalk.svg?style=flat-square)](https://npmjs.org/package/fswalk)
 
 
